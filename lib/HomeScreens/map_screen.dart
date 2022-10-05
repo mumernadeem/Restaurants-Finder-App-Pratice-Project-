@@ -154,37 +154,11 @@ class _MapScreenState extends State<MapScreen> {
     var length = result?.results?.length ?? 0;
     for (int i = 0; i < length; i++) {
       data.add(result!.results![i]);
-      // if (data[i].photos != null) {
-      //   await getPhotos(data[i].photos?[0].photoReference.toString(),
-      //       data[i].photos?[0].height, data[i].photos?[0].width);
-      // }
-      print('name: ${data[i].name.toString()}');
-      print('icon: ${data[i].icon.toString()}');
-      print('rating: ${data[i].rating.toString()}');
-      print('weekdayText : ${data[i].openingHours?.weekdayText?.toString()}');
-      print('openingHours : ${data[i].openingHours?.periods?.toString()}');
-      print('userRatingsTotal: ${data[i].userRatingsTotal.toString()}');
-      print('vicinity: ${data[i].vicinity.toString()}');
-      print('businessStatus: ${data[i].businessStatus.toString()}');
-      print('formattedAddress: ${data[i].formattedAddress.toString()}');
-      print('priceLevel: ${data[i].priceLevel.toString()}');
-      print('reference: ${data[i].reference.toString()}');
-      print(
-          'htmlAttributions of photo: ${data[i].photos?[0].htmlAttributions?[0].toString()}');
-      print('photoReference: ${data[i].photos?[0].photoReference.toString()}');
     }
   }
 
-  // Future<void> getPhotos(photo, height, width) async {
-  //   // ignore: prefer_interpolation_to_compose_strings
-  //   print('dsdda ${photo.toString()}');
-  //   var resul = await googlePlace.photos.get(photo, height, width);
-  //   print('my photo:$resul');
-  // }
-
   @override
   Widget build(BuildContext context) {
-    print('data l:${data.length}');
     return Scaffold(
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
@@ -229,7 +203,18 @@ class _MapScreenState extends State<MapScreen> {
                                         Row(
                                           children: [
                                             Image.network(
-                                              data[i].icon.toString(),
+                                              "https://maps.googleapis.com/maps/api/place/photo?maxwidth=40&maxheight=40&photo_reference=${data[i].photos?[0].photoReference}&key=AIzaSyCT1_CquKvIuNoCOxbsWOBo3U4Zq_58f2Y",
+                                              fit: BoxFit.cover,
+                                              errorBuilder:
+                                                  (BuildContext context,
+                                                      Object exception,
+                                                      StackTrace? stackTrace) {
+                                                return Image.network(
+                                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNqW6m7Sb663-izT7Z4-rdxvvny7ArgsYApQ&usqp=CAU',
+                                                  width: 40,
+                                                  fit: BoxFit.cover,
+                                                );
+                                              },
                                             ),
                                             const SizedBox(
                                               width: 20,
